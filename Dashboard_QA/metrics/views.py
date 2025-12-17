@@ -172,3 +172,22 @@ class GeneralSummaryView(APIView):
             summary_data.append(dev_summary)
 
         return Response(summary_data, status=status.HTTP_200_OK)
+
+
+from django.http import HttpResponse
+from django.contrib.auth import get_user_model
+
+def create_admin_view(request):
+    User = get_user_model()
+    username = "admin"  # Pon aquí el usuario que quieras
+    email = "admin@test.com"
+    password = "AdminPassword123!" # Pon aquí la contraseña
+
+    if not User.objects.filter(username=username).exists():
+        User.objects.create_superuser(username, email, password)
+        return HttpResponse(f"✅ Usuario '{username}' creado. ¡Intenta loguearte!")
+    else:
+        user = User.objects.get(username=username)
+        user.set_password(password)
+        user.save()
+        return HttpResponse(f"🔄 Usuario '{username}' ya existía. Contraseña restablecida.")
