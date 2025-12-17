@@ -9,7 +9,7 @@ sys.path.append(current_path)
 # -------------------------------------------------------------------
 
 # Cambia esto si descubrimos que tu carpeta se llama diferente (ver logs si falla)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Dashboard_QA.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "qa_dashboard.settings")
 
 try:
     django.setup()
