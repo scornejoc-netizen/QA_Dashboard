@@ -61,7 +61,7 @@ function App() {
     // 2. Configurar el "Timer" para actualizar cada 5 segundos (5000 ms)
     const intervalId = setInterval(() => {
         fetchAllData(true); // true indica que es una actualización de fondo
-    }, 50000); 
+    }, 5000); 
 
     // 3. Limpieza: Si el usuario cierra la pestaña, matamos el timer
     return () => clearInterval(intervalId);
