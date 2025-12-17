@@ -4,7 +4,7 @@ import django
 # 1. Configurar el entorno de Django
 # CAMBIA "backend.settings" POR EL NOMBRE DE TU CARPETA DONDE ESTÁ SETTINGS.PY
 # Ejemplo: si tu settings está en "qa_dashboard/settings.py", pon "qa_dashboard.settings"
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Dashboard_QA.settings")
 django.setup()
 
 from django.contrib.auth import get_user_model
