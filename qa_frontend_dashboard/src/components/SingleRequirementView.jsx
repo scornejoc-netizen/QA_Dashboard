@@ -40,15 +40,6 @@ const SingleRequirementView = ({ req }) => {
     { name: 'Escapados Prod', value: prodBugs },
   ];
 
-  // 5. Rebotes QA
-  const rejectionData = [
-    { 
-        name: 'Revisiones', 
-        valor: req.rejection_count === 0 ? 0.2 : req.rejection_count, 
-        realValue: req.rejection_count 
-    }
-  ];
-
   return (
     <div className="animate-fade-in" style={{ marginTop: '20px', paddingBottom: '40px' }}>
       
@@ -196,54 +187,67 @@ const SingleRequirementView = ({ req }) => {
             )}
         </div>
 
-        {/* 5. SECCIÓN: CALIDAD DE ENTREGA (REBOTES) 
-            AHORA INTEGRADA DENTRO DEL GRID
-            gridColumn: '1 / -1' hace que ocupe todo el ancho de la fila automáticamente.
-        */}
+        {/* 5. CALIDAD DE ENTREGA (REBOTES) - Ahora al lado de Producción */}
         <div style={{ 
-            gridColumn: '1 / -1',  // <--- ESTA ES LA CLAVE PARA QUE OCUPE TODO EL ANCHO
             background: '#1e293b', 
             padding: '20px', 
             borderRadius: '12px', 
-            border: '1px solid #334155' 
+            border: '1px solid #334155',
+            display: 'flex',
+            flexDirection: 'column'
         }}>
-            <h3 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <RotateCcw size={20} color={req.rejection_count > 0 ? "#ef4444" : "#22c55e"}/> Ciclos de Revisión (First Time Yield)
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <RotateCcw size={20} color={req.rejection_count > 0 ? "#ef4444" : "#22c55e"}/> Ciclos de Revisión
             </h3>
             
-            <div style={{ width: '100%', height: 120 }}> {/* Altura ajustada para ser panorámico pero no gigante */}
-                <ResponsiveContainer>
-                    <BarChart
-                        layout="vertical"
-                        data={rejectionData}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
-                        <XAxis type="number" hide />
-                        <YAxis dataKey="name" type="category" hide />
-                        <Tooltip 
-                            cursor={{fill: 'transparent'}}
-                            contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#f1f5f9' }}
-                            formatter={(value, name, props) => {
-                                return [props.payload.realValue + " veces", "Devuelto a Desarrollo"];
-                            }}
-                        />
-                        <Bar dataKey="valor" barSize={50} radius={[0, 4, 4, 0]}>
-                             <LabelList 
-                                dataKey="realValue" 
-                                position="right" 
-                                fill="#fff" 
-                                formatter={(val) => val === 0 ? "¡Excelente! Aprobado a la primera" : `${val} Devoluciones`}
-                                style={{ fontWeight: 'bold', fontSize: '1.2rem' }}
-                             />
-                            {
-                                rejectionData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.realValue === 0 ? '#22c55e' : '#ef4444'} />
-                                ))
-                            }
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '200px' }}>
+                {/* Visualización simplificada sin gráfico de barras */}
+                <div style={{ 
+                    textAlign: 'center',
+                    padding: '30px 20px',
+                    background: req.rejection_count === 0 ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                    borderRadius: '8px',
+                    border: `2px solid ${req.rejection_count === 0 ? '#22c55e' : '#ef4444'}`
+                }}>
+                    <div style={{ 
+                        fontSize: '3rem', 
+                        fontWeight: 'bold', 
+                        color: req.rejection_count === 0 ? '#22c55e' : '#ef4444',
+                        marginBottom: '10px'
+                    }}>
+                        {req.rejection_count}
+                    </div>
+                    <div style={{ 
+                        fontSize: '1rem', 
+                        color: '#94a3b8',
+                        marginBottom: '15px'
+                    }}>
+                        {req.rejection_count === 1 ? 'Devolución' : 'Devoluciones'}
+                    </div>
+                    <div style={{ 
+                        fontSize: '0.95rem', 
+                        fontWeight: '600',
+                        color: req.rejection_count === 0 ? '#22c55e' : '#f59e0b'
+                    }}>
+                        {req.rejection_count === 0 ? '✓ Aprobado a la primera' : `⚠ Requirió ${req.rejection_count} ${req.rejection_count === 1 ? 'revisión' : 'revisiones'}`}
+                    </div>
+                </div>
+                
+                {/* Mensaje adicional para contexto */}
+                <div style={{ 
+                    marginTop: '15px',
+                    padding: '12px',
+                    background: '#0f172a',
+                    borderRadius: '6px',
+                    fontSize: '0.85rem',
+                    color: '#94a3b8',
+                    textAlign: 'center'
+                }}>
+                    {req.rejection_count === 0 
+                        ? 'First Time Yield: 100% - Excelente calidad de entrega'
+                        : `First Time Yield: ${((1 / (req.rejection_count + 1)) * 100).toFixed(0)}% - Área de mejora identificada`
+                    }
+                </div>
             </div>
         </div>
 
