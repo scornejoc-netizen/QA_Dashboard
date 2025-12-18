@@ -3,12 +3,12 @@ import {
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList
 } from 'recharts';
-import { CheckCircle, AlertTriangle, Clock, Activity, AlertOctagon, RotateCcw } from 'lucide-react'; // <--- Agregué RotateCcw
+import { CheckCircle, AlertTriangle, Clock, Activity, AlertOctagon, RotateCcw } from 'lucide-react';
 
 const SingleRequirementView = ({ req }) => {
   if (!req) return null;
 
-  // --- PREPARACIÓN DE DATOS ---
+  // --- PREPARACIÓN DE DATOS (Igual que antes) ---
 
   // 1. Gráfico Tiempo
   const estimated = parseFloat(req.estimated_effort_hours);
@@ -22,7 +22,7 @@ const SingleRequirementView = ({ req }) => {
     { name: 'Fallidas', value: req.unit_tests_failed },
   ];
 
-  // 3. Gráfico Casos vs Bugs (Eficiencia de Pruebas)
+  // 3. Gráfico Casos vs Bugs
   const testingEfficiencyData = [
     { name: 'Funcional', Casos: req.functional_cases, Bugs: req.functional_bugs },
     { name: 'Integración', Casos: req.integration_cases, Bugs: req.integration_bugs },
@@ -33,8 +33,6 @@ const SingleRequirementView = ({ req }) => {
   const totalBugsTicket = req.functional_bugs + req.integration_bugs + req.regression_bugs + req.production_bugs;
   const prodBugs = req.production_bugs;
   const qaBugs = totalBugsTicket - prodBugs;
-
-  // Calculamos porcentaje de escape a producción
   const prodPercentage = totalBugsTicket > 0 ? ((prodBugs / totalBugsTicket) * 100).toFixed(1) : 0;
 
   const prodImpactData = [
@@ -42,8 +40,7 @@ const SingleRequirementView = ({ req }) => {
     { name: 'Escapados Prod', value: prodBugs },
   ];
 
-  // 5. NUEVO: Datos para Rebotes (Calidad de Entrega)
-  // Usamos un valor mínimo (0.2) si es 0 para que se pinte la barra verde, pero mostramos 0 en el tooltip
+  // 5. Rebotes QA
   const rejectionData = [
     { 
         name: 'Revisiones', 
@@ -69,31 +66,26 @@ const SingleRequirementView = ({ req }) => {
             </div>
         </div>
 
-        {/* NÚMEROS CLAROS (Ahora con 5 columnas) */}
+        {/* NÚMEROS CLAROS */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '20px', background: '#0f172a', padding: '20px', borderRadius: '8px', border: '1px solid #334155' }}>
-            {/* 1. Estimado */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>TIEMPO ESTIMADO</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>{estimated} h</span>
             </div>
-            {/* 2. Real */}
             <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>TIEMPO TOMADO</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: timeColor }}>{real} h</span>
             </div>
-            {/* 3. Impacto */}
             <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>IMPACTO TIEMPO</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: req.deviation_hours >= 0 ? '#22c55e' : '#ef4444' }}>
                     {req.deviation_hours >= 0 ? `AHORRO: ${parseFloat(req.deviation_hours).toFixed(1)} h` : `RETRASO: ${Math.abs(parseFloat(req.deviation_hours)).toFixed(1)} h`}
                 </span>
             </div>
-            {/* 4. Bugs Total */}
              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>TOTAL BUGS</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#f59e0b' }}>{totalBugsTicket}</span>
             </div>
-            {/* 5. NUEVO: Rebotes QA */}
             <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>REBOTES QA</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: req.rejection_count > 0 ? '#ef4444' : '#22c55e' }}>
@@ -103,7 +95,7 @@ const SingleRequirementView = ({ req }) => {
         </div>
       </div>
 
-      {/* --- SECCIÓN DE GRÁFICOS --- */}
+      {/* --- SECCIÓN DE GRÁFICOS (GRID UNIFICADO) --- */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '20px' }}>
         
         {/* 1. COMPARATIVA TIEMPO */}
@@ -204,16 +196,22 @@ const SingleRequirementView = ({ req }) => {
             )}
         </div>
 
-      </div>
-
-      {/* --- 5. SECCIÓN NUEVA: CALIDAD DE ENTREGA (REBOTES) --- */}
-      {/* Lo ponemos debajo ocupando todo el ancho para resaltar */}
-      <div style={{ marginTop: '20px', background: '#1e293b', padding: '20px', borderRadius: '12px', border: '1px solid #334155' }}>
+        {/* 5. SECCIÓN: CALIDAD DE ENTREGA (REBOTES) 
+            AHORA INTEGRADA DENTRO DEL GRID
+            gridColumn: '1 / -1' hace que ocupe todo el ancho de la fila automáticamente.
+        */}
+        <div style={{ 
+            gridColumn: '1 / -1',  // <--- ESTA ES LA CLAVE PARA QUE OCUPE TODO EL ANCHO
+            background: '#1e293b', 
+            padding: '20px', 
+            borderRadius: '12px', 
+            border: '1px solid #334155' 
+        }}>
             <h3 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <RotateCcw size={20} color={req.rejection_count > 0 ? "#ef4444" : "#22c55e"}/> Ciclos de Revisión (First Time Yield)
             </h3>
             
-            <div style={{ width: '100%', height: 100 }}>
+            <div style={{ width: '100%', height: 120 }}> {/* Altura ajustada para ser panorámico pero no gigante */}
                 <ResponsiveContainer>
                     <BarChart
                         layout="vertical"
@@ -230,13 +228,13 @@ const SingleRequirementView = ({ req }) => {
                                 return [props.payload.realValue + " veces", "Devuelto a Desarrollo"];
                             }}
                         />
-                        <Bar dataKey="valor" barSize={40} radius={[0, 4, 4, 0]}>
+                        <Bar dataKey="valor" barSize={50} radius={[0, 4, 4, 0]}>
                              <LabelList 
                                 dataKey="realValue" 
                                 position="right" 
                                 fill="#fff" 
                                 formatter={(val) => val === 0 ? "¡Excelente! Aprobado a la primera" : `${val} Devoluciones`}
-                                style={{ fontWeight: 'bold' }}
+                                style={{ fontWeight: 'bold', fontSize: '1.2rem' }}
                              />
                             {
                                 rejectionData.map((entry, index) => (
@@ -247,8 +245,9 @@ const SingleRequirementView = ({ req }) => {
                     </BarChart>
                 </ResponsiveContainer>
             </div>
-      </div>
+        </div>
 
+      </div>
     </div>
   );
 };
