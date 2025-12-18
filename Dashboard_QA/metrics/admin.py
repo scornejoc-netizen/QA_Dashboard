@@ -17,6 +17,7 @@ class RequirementAdmin(admin.ModelAdmin):
         'unit_test_summary',
         'effort_summary',
         'deviation_colored'
+            ,'rejection_count'
     )
     
     # Filtros laterales
