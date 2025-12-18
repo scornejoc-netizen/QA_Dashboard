@@ -3,7 +3,7 @@ import {
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList
 } from 'recharts';
-import { CheckCircle, AlertTriangle, Clock, Activity, Bug, AlertOctagon } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Clock, Activity, AlertOctagon, RotateCcw } from 'lucide-react'; // <--- Agregué RotateCcw
 
 const SingleRequirementView = ({ req }) => {
   if (!req) return null;
@@ -22,14 +22,14 @@ const SingleRequirementView = ({ req }) => {
     { name: 'Fallidas', value: req.unit_tests_failed },
   ];
 
-  // 3. NUEVO: Gráfico Casos vs Bugs (Eficiencia de Pruebas)
+  // 3. Gráfico Casos vs Bugs (Eficiencia de Pruebas)
   const testingEfficiencyData = [
     { name: 'Funcional', Casos: req.functional_cases, Bugs: req.functional_bugs },
     { name: 'Integración', Casos: req.integration_cases, Bugs: req.integration_bugs },
     { name: 'Regresión', Casos: req.regression_cases, Bugs: req.regression_bugs },
   ];
 
-  // 4. NUEVO: Gráfico Impacto en Producción
+  // 4. Gráfico Impacto en Producción
   const totalBugsTicket = req.functional_bugs + req.integration_bugs + req.regression_bugs + req.production_bugs;
   const prodBugs = req.production_bugs;
   const qaBugs = totalBugsTicket - prodBugs;
@@ -42,10 +42,20 @@ const SingleRequirementView = ({ req }) => {
     { name: 'Escapados Prod', value: prodBugs },
   ];
 
+  // 5. NUEVO: Datos para Rebotes (Calidad de Entrega)
+  // Usamos un valor mínimo (0.2) si es 0 para que se pinte la barra verde, pero mostramos 0 en el tooltip
+  const rejectionData = [
+    { 
+        name: 'Revisiones', 
+        valor: req.rejection_count === 0 ? 0.2 : req.rejection_count, 
+        realValue: req.rejection_count 
+    }
+  ];
+
   return (
     <div className="animate-fade-in" style={{ marginTop: '20px', paddingBottom: '40px' }}>
       
-      {/* --- ENCABEZADO (Igual que antes) --- */}
+      {/* --- ENCABEZADO --- */}
       <div style={{ background: '#1e293b', padding: '25px', borderRadius: '12px', marginBottom: '25px', borderLeft: req.is_qa_approved ? '6px solid #22c55e' : '6px solid #f59e0b', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
             <div>
@@ -59,30 +69,41 @@ const SingleRequirementView = ({ req }) => {
             </div>
         </div>
 
-        {/* NÚMEROS CLAROS */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', background: '#0f172a', padding: '20px', borderRadius: '8px', border: '1px solid #334155' }}>
+        {/* NÚMEROS CLAROS (Ahora con 5 columnas) */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '20px', background: '#0f172a', padding: '20px', borderRadius: '8px', border: '1px solid #334155' }}>
+            {/* 1. Estimado */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>TIEMPO ESTIMADO</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>{estimated} h</span>
             </div>
+            {/* 2. Real */}
             <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>TIEMPO TOMADO</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: timeColor }}>{real} h</span>
             </div>
+            {/* 3. Impacto */}
             <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>IMPACTO TIEMPO</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: req.deviation_hours >= 0 ? '#22c55e' : '#ef4444' }}>
                     {req.deviation_hours >= 0 ? `AHORRO: ${parseFloat(req.deviation_hours).toFixed(1)} h` : `RETRASO: ${Math.abs(parseFloat(req.deviation_hours)).toFixed(1)} h`}
                 </span>
             </div>
+            {/* 4. Bugs Total */}
              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
                 <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>TOTAL BUGS</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#f59e0b' }}>{totalBugsTicket}</span>
             </div>
+            {/* 5. NUEVO: Rebotes QA */}
+            <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #334155', paddingLeft: '20px' }}>
+                <span style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '5px' }}>REBOTES QA</span>
+                <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: req.rejection_count > 0 ? '#ef4444' : '#22c55e' }}>
+                    {req.rejection_count}
+                </span>
+            </div>
         </div>
       </div>
 
-      {/* --- SECCIÓN DE GRÁFICOS (4 PANELES) --- */}
+      {/* --- SECCIÓN DE GRÁFICOS --- */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '20px' }}>
         
         {/* 1. COMPARATIVA TIEMPO */}
@@ -105,7 +126,7 @@ const SingleRequirementView = ({ req }) => {
             </div>
         </div>
 
-        {/* 2. EFICACIA DE PRUEBAS (CASOS vs BUGS) - EL NUEVO */}
+        {/* 2. EFICACIA DE PRUEBAS */}
         <div style={{ background: '#1e293b', padding: '20px', borderRadius: '12px', border: '1px solid #334155' }}>
             <h3 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Activity size={20} color="#f59e0b"/> Cobertura vs Defectos
@@ -118,11 +139,9 @@ const SingleRequirementView = ({ req }) => {
                         <YAxis stroke="#94a3b8" />
                         <Tooltip cursor={{fill: '#334155', opacity: 0.2}} contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff' }} />
                         <Legend verticalAlign="top"/>
-                        {/* Casos en Azul Transparente */}
                         <Bar dataKey="Casos" fill="#3b82f6" fillOpacity={0.6} radius={[4, 4, 0, 0]}>
                              <LabelList dataKey="Casos" position="top" fill="#3b82f6" fontSize={10} formatter={(val) => `Casos: ${val}`}/>
                         </Bar>
-                        {/* Bugs en Naranja Fuerte */}
                         <Bar dataKey="Bugs" fill="#f59e0b" radius={[4, 4, 0, 0]}>
                              <LabelList dataKey="Bugs" position="top" fill="#f59e0b" fontSize={12} fontWeight="bold"/>
                         </Bar>
@@ -151,7 +170,7 @@ const SingleRequirementView = ({ req }) => {
             <div style={{ textAlign: 'center', fontWeight: 'bold', color: '#fff' }}>{req.unit_test_success_rate}% Éxito</div>
         </div>
 
-        {/* 4. IMPACTO EN PRODUCCIÓN - EL NUEVO */}
+        {/* 4. IMPACTO EN PRODUCCIÓN */}
         <div style={{ background: '#1e293b', padding: '20px', borderRadius: '12px', border: '1px solid #334155' }}>
              <h3 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <AlertOctagon size={20} color="#ef4444"/> Fugas a Producción
@@ -186,6 +205,50 @@ const SingleRequirementView = ({ req }) => {
         </div>
 
       </div>
+
+      {/* --- 5. SECCIÓN NUEVA: CALIDAD DE ENTREGA (REBOTES) --- */}
+      {/* Lo ponemos debajo ocupando todo el ancho para resaltar */}
+      <div style={{ marginTop: '20px', background: '#1e293b', padding: '20px', borderRadius: '12px', border: '1px solid #334155' }}>
+            <h3 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <RotateCcw size={20} color={req.rejection_count > 0 ? "#ef4444" : "#22c55e"}/> Ciclos de Revisión (First Time Yield)
+            </h3>
+            
+            <div style={{ width: '100%', height: 100 }}>
+                <ResponsiveContainer>
+                    <BarChart
+                        layout="vertical"
+                        data={rejectionData}
+                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" hide />
+                        <Tooltip 
+                            cursor={{fill: 'transparent'}}
+                            contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#f1f5f9' }}
+                            formatter={(value, name, props) => {
+                                return [props.payload.realValue + " veces", "Devuelto a Desarrollo"];
+                            }}
+                        />
+                        <Bar dataKey="valor" barSize={40} radius={[0, 4, 4, 0]}>
+                             <LabelList 
+                                dataKey="realValue" 
+                                position="right" 
+                                fill="#fff" 
+                                formatter={(val) => val === 0 ? "¡Excelente! Aprobado a la primera" : `${val} Devoluciones`}
+                                style={{ fontWeight: 'bold' }}
+                             />
+                            {
+                                rejectionData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={entry.realValue === 0 ? '#22c55e' : '#ef4444'} />
+                                ))
+                            }
+                        </Bar>
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+      </div>
+
     </div>
   );
 };
