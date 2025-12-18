@@ -29,7 +29,7 @@ class RequirementAdmin(admin.ModelAdmin):
     # Agrupar campos en el formulario de edición
     fieldsets = (
         ('Información General', {
-            'fields': ('jira_ticket', 'developer', 'description', 'is_qa_approved')
+            'fields': ('jira_ticket', 'developer', 'description', 'is_qa_approved', 'rejection_count')
         }),
         ('Calidad de Código (Dev)', {
             'fields': ('unit_tests_total', 'unit_tests_passed', 'unit_tests_failed'),
