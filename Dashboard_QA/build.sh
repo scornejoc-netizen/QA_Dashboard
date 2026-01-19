@@ -7,6 +7,7 @@ pip install -r requirements.txt
 python manage.py collectstatic --no-input
 python manage.py migrate
 
-# --- EJECUTAR SCRIPT DE USUARIO ---
-echo "Ejecutando script de creación de admin..."
-python create_admin.py
+# --- CREAR SUPERUSUARIO ---
+# Render ejecutará esto en cada deploy, pero el script de python
+# valida si ya existe para no fallar.
+python create_superuser.py
