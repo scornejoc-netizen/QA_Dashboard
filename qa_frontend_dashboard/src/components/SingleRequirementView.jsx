@@ -244,8 +244,8 @@ const SingleRequirementView = ({ req }) => {
                     textAlign: 'center'
                 }}>
                     {req.rejection_count === 0 
-                        ? 'First Time Yield: 100% - Excelente calidad de entrega'
-                        : `First Time Yield: ${((1 / (req.rejection_count + 1)) * 100).toFixed(0)}% - Área de mejora identificada`
+                        ? 'Rendimiento: 100% - Excelente calidad de entrega'
+                        : `Rendimiento: ${((1 / (req.rejection_count + 1)) * 100).toFixed(0)}% - Área de mejora identificada`
                     }
                 </div>
             </div>
