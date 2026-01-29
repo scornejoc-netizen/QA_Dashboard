@@ -1,0 +1,11 @@
+1	admin	logentry
+2	auth	group
+3	auth	permission
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	metrics	developer
+8	metrics	requirement
+\.
+
+

@@ -1,0 +1,59 @@
+1	2025-12-17 23:50:44.015572+00	1	Stephano Alonso Cornejo Córdova | QA Senior	1	[{"added": {}}]	7	1
+2	2025-12-17 23:50:55.979446+00	2	Marco José Villanueva Torres | Desarrollador Senior	1	[{"added": {}}]	7	1
+3	2025-12-17 23:51:06.263299+00	3	Alexis Arroyo Huarachi | QA Junior	1	[{"added": {}}]	7	1
+4	2025-12-17 23:51:15.835295+00	4	Christopher Sandy Tumi Roque | Desarrollador Junior	1	[{"added": {}}]	7	1
+5	2025-12-17 23:51:25.846586+00	5	Junior Luis Llerena Ticona | Desarrollador Junior	1	[{"added": {}}]	7	1
+6	2025-12-17 23:51:37.39163+00	6	Deivid Jhon del Carpio Vilca | Becario DBA	1	[{"added": {}}]	7	1
+7	2025-12-17 23:51:51.540252+00	7	Gilmer Quispe Mamani | Administrador de Base de Datos	1	[{"added": {}}]	7	1
+8	2025-12-17 23:54:03.703912+00	1	TUTOR_VIRTUAL - Christopher Sandy Tumi Roque	1	[{"added": {}}]	8	1
+9	2025-12-18 00:14:05.79445+00	2	WEBINAR - Christopher Sandy Tumi Roque	1	[{"added": {}}]	8	1
+10	2025-12-18 00:19:02.258775+00	3	AGENDA_COMERCIALV5V6 - Junior Luis Llerena Ticona	1	[{"added": {}}]	8	1
+11	2025-12-18 00:19:41.311738+00	3	AGENDA_COMERCIALV5V6 - Junior Luis Llerena Ticona	2	[{"changed": {"fields": ["\\u00bfAprobado por QA?"]}}]	8	1
+12	2025-12-18 00:22:59.169625+00	4	MIGRACIÓN_V5_V6 - Junior Luis Llerena Ticona	1	[{"added": {}}]	8	1
+13	2025-12-18 00:23:18.68103+00	4	MIGRACIÓN_V5_V6 - Junior Luis Llerena Ticona	2	[{"changed": {"fields": ["\\u00bfAprobado por QA?", "Total Unitarias"]}}]	8	1
+14	2025-12-18 00:24:09.161436+00	1	TUTOR_VIRTUAL - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Unitarias Pasadas"]}}]	8	1
+15	2025-12-18 00:24:18.068481+00	1	TUTOR_VIRTUAL - Christopher Sandy Tumi Roque	2	[]	8	1
+16	2025-12-18 00:24:24.842975+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Unitarias Pasadas"]}}]	8	1
+17	2025-12-18 00:24:30.451302+00	3	AGENDA_COMERCIALV5V6 - Junior Luis Llerena Ticona	2	[{"changed": {"fields": ["Unitarias Pasadas"]}}]	8	1
+18	2025-12-18 00:24:36.193671+00	4	MIGRACIÓN_V5_V6 - Junior Luis Llerena Ticona	2	[{"changed": {"fields": ["Unitarias Pasadas"]}}]	8	1
+19	2025-12-18 14:40:25.94078+00	5	GESTIÓN_LEADS - Marco José Villanueva Torres	1	[{"added": {}}]	8	1
+20	2025-12-18 14:56:41.204596+00	6	DISCREPANCIAS - Alexis Arroyo Huarachi	1	[{"added": {}}]	8	1
+21	2025-12-18 15:01:39.312588+00	7	MONTO_PAGO - Marco José Villanueva Torres	1	[{"added": {}}]	8	1
+22	2025-12-18 15:01:49.275615+00	7	MONTO_PAGO - Marco José Villanueva Torres	2	[{"changed": {"fields": ["\\u00bfAprobado por QA?"]}}]	8	1
+23	2025-12-18 15:02:18.275209+00	5	GESTIÓN_LEADS - Marco José Villanueva Torres	2	[{"changed": {"fields": ["\\u00bfAprobado por QA?"]}}]	8	1
+24	2025-12-18 15:03:44.48018+00	7	MONTO_PAGO - Marco José Villanueva Torres	2	[{"changed": {"fields": ["Esfuerzo Estimado (Hrs)", "Fecha Fin Real"]}}]	8	1
+25	2025-12-18 15:05:04.305187+00	6	DISCREPANCIAS - Alexis Arroyo Huarachi	2	[{"changed": {"fields": ["Fecha Fin Real"]}}]	8	1
+26	2025-12-18 15:05:32.694727+00	6	DISCREPANCIAS - Alexis Arroyo Huarachi	2	[{"changed": {"fields": ["Fecha Fin Real"]}}]	8	1
+27	2025-12-18 15:28:50.236112+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Esfuerzo Estimado (Hrs)"]}}]	8	1
+28	2025-12-18 15:29:06.222355+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Esfuerzo Estimado (Hrs)"]}}]	8	1
+29	2025-12-18 16:05:29.644611+00	4	MIGRACIÓN_V5_V6 - Junior Luis Llerena Ticona	2	[]	8	1
+30	2025-12-18 16:39:21.648841+00	4	MIGRACIÓN_V5_V6 - Junior Luis Llerena Ticona	2	[{"changed": {"fields": ["Cant. Rechazos QA"]}}]	8	1
+31	2025-12-18 16:40:43.219114+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Cant. Rechazos QA"]}}]	8	1
+32	2025-12-18 16:57:20.779005+00	7	MONTO_PAGO - Marco José Villanueva Torres	2	[{"changed": {"fields": ["Total Unitarias", "Unitarias Pasadas"]}}]	8	1
+33	2025-12-22 14:16:40.315074+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["\\u00bfAprobado por QA?"]}}]	8	1
+34	2025-12-22 14:17:10.850067+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Casos Funcionales"]}}]	8	1
+35	2025-12-22 14:17:28.575928+00	2	WEBINAR - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Casos Integraci\\u00f3n", "Casos Regresi\\u00f3n"]}}]	8	1
+36	2025-12-22 14:36:33.756021+00	3	Alexis Arroyo Huarachi | Desarrollador Junior	2	[{"changed": {"fields": ["Rol"]}}]	7	1
+37	2025-12-22 17:09:25.386385+00	8	Luis Humberto Oscata Flores | Desarrollador Junior	1	[{"added": {}}]	7	1
+38	2025-12-22 17:09:38.384565+00	9	Luis Humberto Oscata Flores | Desarrollador Junior	1	[{"added": {}}]	7	1
+39	2025-12-22 17:09:53.541049+00	10	Max Mantilla Rodríguez | Desarrollador Junior	1	[{"added": {}}]	7	1
+40	2025-12-22 17:11:24.699784+00	8	Miguel Angel Valdivia Coazaca | Desarrollador Junior	2	[{"changed": {"fields": ["Nombre Completo"]}}]	7	1
+41	2025-12-22 17:12:11.420143+00	8	ACTUALIZACIÓN_PMP - Luis Humberto Oscata Flores	1	[{"added": {}}]	8	1
+42	2025-12-23 14:48:47.221857+00	9	DBA_INSCRIPCIONES - Gilmer Quispe Mamani	1	[{"added": {}}]	8	1
+43	2025-12-23 14:50:14.149787+00	9	DBA_INSCRIPCIONES - Gilmer Quispe Mamani	2	[{"changed": {"fields": ["Esfuerzo Estimado (Hrs)", "Fecha Inicio Real", "Fecha Fin Real"]}}]	8	1
+44	2025-12-26 18:05:19.868826+00	10	AGENDA_COMERCIAL_V5 - Junior Luis Llerena Ticona	1	[{"added": {}}]	8	1
+45	2025-12-26 18:07:07.067408+00	10	AGENDA_COMERCIAL_V5 - Junior Luis Llerena Ticona	2	[{"changed": {"fields": ["Fecha Inicio Real", "Fecha Fin Real", "Casos Funcionales", "Casos Integraci\\u00f3n", "Casos Regresi\\u00f3n"]}}]	8	1
+46	2025-12-30 16:57:22.950843+00	11	MIGRACIÓN_V5V6 - Marco José Villanueva Torres	1	[{"added": {}}]	8	1
+47	2026-01-02 16:37:46.778071+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	1	[{"added": {}}]	8	1
+48	2026-01-02 16:51:12.947029+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Total Unitarias", "Unitarias Pasadas"]}}]	8	1
+49	2026-01-02 16:51:30.764965+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Total Unitarias"]}}]	8	1
+50	2026-01-02 17:24:17.005121+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Unitarias Pasadas"]}}]	8	1
+51	2026-01-02 17:24:38.797965+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Unitarias Pasadas"]}}]	8	1
+52	2026-01-07 23:13:13.53795+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["\\u00bfAprobado por QA?", "Total Unitarias", "Unitarias Pasadas", "Fecha Fin Real"]}}]	8	1
+53	2026-01-07 23:13:36.21435+00	12	COMUN_ACADEM - Christopher Sandy Tumi Roque	2	[{"changed": {"fields": ["Casos Funcionales", "Casos Integraci\\u00f3n", "Casos Regresi\\u00f3n"]}}]	8	1
+54	2026-01-07 23:18:45.450003+00	13	LINKEDIN - Marco José Villanueva Torres	1	[{"added": {}}]	8	1
+55	2026-01-07 23:20:18.222752+00	13	LINKEDIN - Marco José Villanueva Torres	2	[]	8	1
+56	2026-01-07 23:44:41.832243+00	14	ABANDONO_ATC - Deivid Jhon del Carpio Vilca	1	[{"added": {}}]	8	1
+\.
+
+

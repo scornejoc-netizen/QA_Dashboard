@@ -39,7 +39,7 @@ class Requirement(models.Model):
         related_name='requirements',
         verbose_name="Desarrollador Asignado"
     )
-    jira_ticket = models.CharField(max_length=20, unique=True, verbose_name="Ticket de Jira")
+    jira_ticket = models.CharField(max_length=250, unique=True, verbose_name="Ticket de Jira")
     description = models.TextField(verbose_name="Descripción")
     is_qa_approved = models.BooleanField(default=False, verbose_name="¿Aprobado por QA?")
     
