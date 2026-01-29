@@ -1,4 +1,5 @@
 # metrics/models.py
+from datetime import timedelta
 from django.db import models
 from django.core.exceptions import ValidationError
 from decimal import Decimal
@@ -90,10 +91,22 @@ class Requirement(models.Model):
 
     @property
     def real_effort_days(self):
-        if self.start_date_real and self.end_date_real: 
+        """Calcula días laborales (Lunes a Viernes) entre inicio y fin."""
+        if self.start_date_real and self.end_date_real:
             if self.end_date_real >= self.start_date_real:
-                delta = self.end_date_real - self.start_date_real
-                return delta.days + 1
+                day_count = 0
+                current_date = self.start_date_real
+                
+                # Iteramos desde la fecha de inicio hasta la fecha fin
+                while current_date <= self.end_date_real:
+                    # weekday() devuelve: 0=Lunes, 1=Martes ... 5=Sábado, 6=Domingo
+                    if current_date.weekday() < 5:  # Si es menor a 5 (Lunes a Viernes)
+                        day_count += 1
+                    
+                    # Pasamos al siguiente día
+                    current_date += timedelta(days=1)
+                
+                return day_count
         return 0
 
     @property
