@@ -211,7 +211,7 @@ function App() {
                         <div style={{fontSize:'3rem', fontWeight:'bold', color: report.dde_score > 90 ? '#22c55e':'#f59e0b'}}>
                             {report.dde_score}%
                         </div>
-                        <div style={{fontSize:'0.9rem', color: '#fff'}}>Eficacia QA (DDE)</div>
+                        <div style={{fontSize:'0.9rem', color: '#fff'}}>Calidad en Producción</div>
                     </div>
                     {/* Agrega más métricas aquí si quieres */}
                 </div>

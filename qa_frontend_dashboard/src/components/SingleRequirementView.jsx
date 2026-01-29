@@ -145,7 +145,7 @@ const SingleRequirementView = ({ req }) => {
                             <Cell fill="#22c55e" />
                             <Cell fill="#ef4444" />
                         </Pie>
-                        <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155' }} />
+                        <Tooltip contentStyle={{ backgroundColor: '#fff', borderColor: '#334155' }} />
                         <Legend verticalAlign="bottom" />
                     </PieChart>
                 </ResponsiveContainer>
